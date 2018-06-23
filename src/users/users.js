@@ -11,12 +11,15 @@ import {
     SimpleForm,
     Edit,
     Create,
-    SimpleShowLayout,
+    TabbedShowLayout,
     Show,
+    Tab,
+    ReferenceManyField
 } from 'react-admin';
 import PeopleIcon from '@material-ui/icons/People';
 import { withStyles } from '@material-ui/core/styles';
 import {AvatarField, UserShowPageTitle} from './customization.js';
+import { CourseList } from '../courses/courses.js';
 
 export const UserIcon = PeopleIcon;
 
@@ -69,17 +72,24 @@ const styles = {
 };
 
 export const UserShow = props => (
-    <Show 
-    {...props}
-    title = {<AvatarField size="50" />}
-    >    
-        <SimpleShowLayout style={styles.item}>
-            <TextField source="id" />
-            <EmailField source="email" />
-            <TextField source="firstName" />
-            <TextField source="lastName" />
-            <TextField source="phone"/>
-        </SimpleShowLayout>
+    <Show {...props} title = {<AvatarField size="50" />}>
+        <TabbedShowLayout>
+            <Tab label="summary">
+                <TextField source="id" />
+                <EmailField source="email" />
+                <TextField source="firstName" />
+                <TextField source="lastName" />
+                <TextField source="phone"/>
+            </Tab>
+            <Tab label="learning courses">
+                <ReferenceManyField addLabel={false} reference="learningCourses" target="users">
+                    <CourseList/>
+                </ReferenceManyField>
+            </Tab>
+            <Tab label="teaching courses">
+                
+            </Tab>
+        </TabbedShowLayout>
     </Show>
 );
 

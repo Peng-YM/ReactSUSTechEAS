@@ -56,7 +56,6 @@ export const CourseShow = props => (
                     <Datagrid>
                         <TextField source="id"/>
                         <TextField source="examName"/>
-                        {/* <TextField source=""/> */}
                         <EditButton/>
                         <ShowButton/>
                     </Datagrid>

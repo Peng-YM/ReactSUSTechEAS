@@ -13,7 +13,3 @@ export const AvatarField = ({ record, size }) => (
 AvatarField.defaultProps = {
     size: 25,
 };
-
-
-
-
