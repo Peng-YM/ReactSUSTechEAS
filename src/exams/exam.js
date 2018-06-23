@@ -4,6 +4,7 @@ import {
     Show,
     SimpleShowLayout,
     TextField,
+    Edit,
     Datagrid
 } from 'react-admin';
 import { List } from '@material-ui/core';

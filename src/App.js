@@ -15,7 +15,7 @@ const httpClient = (url, options = {}) => {
   return fetchUtils.fetchJson(url, options);
 }
 
-const dataProvider = jsonHalRestProvider('http://10.21.124.151:8080', httpClient);
+const dataProvider = jsonHalRestProvider('http://10.20.20.126:8080', httpClient);
 const App = () =>(
   <Admin title="SUSTech EAS" dashboard={Dashboard} authProvider={authProvider} dataProvider={dataProvider}>
     <Resource 
