@@ -8,7 +8,8 @@ import {
     Datagrid,
     List,
     TabbedForm,
-    FormTab
+    FormTab,
+    DateField
 } from 'react-admin';
 
 import RichTextInput from 'ra-input-rich-text';
@@ -18,6 +19,7 @@ export const ExamShow = props => (
         <SimpleShowLayout>
             <TextField source="id"/>
             <TextField source="examName"/>
+            <DateField source="date"/>
         </SimpleShowLayout>
     </Show>
 );
@@ -28,6 +30,7 @@ export const ExamEdit = props => (
             <FormTab label="summary">
                 <TextField source="id"/>
                 <TextField source="examName"/>
+                <DateField source="date"/>
             </FormTab>
             <FormTab label="description">
 
@@ -41,6 +44,7 @@ export const ExamList = props => (
         <Datagrid>
             <TextField source="id"/>
             <TextField source="examName"/>
+            <DateField source="date"/>
         </Datagrid>
     </List>
 );
