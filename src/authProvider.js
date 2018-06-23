@@ -5,7 +5,7 @@ export default (type, params) => {
     // called when the user attempts to log in
     if (type === AUTH_LOGIN) {
         const {username, password} = params;
-        return axios.get('http://69.171.71.251:8080', {
+        return axios.get('http://10.20.20.126:8080', {
             auth: {
                 username: username,
                 password: password
