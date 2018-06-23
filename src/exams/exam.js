@@ -13,6 +13,10 @@ import {
 } from 'react-admin';
 
 import RichTextInput from 'ra-input-rich-text';
+import AssementIcon from '@material-ui/icons/Assessment';
+
+
+export const ExamIcon = AssementIcon;
 
 export const ExamShow = props => (
     <Show {...props}>

@@ -67,19 +67,19 @@ export const UserCreate = props => (
 
 const styles = {
     item: {
-        float: 'right',
+        margin: '1rem',
     },
 };
 
 export const UserShow = props => (
-    <Show {...props} title = {<AvatarField size="50" />}>
+    <Show {...props} title = {<AvatarField size="60" />}>
         <TabbedShowLayout>
             <Tab label="summary">
-                <TextField source="id" />
-                <EmailField source="email" />
-                <TextField source="firstName" />
-                <TextField source="lastName" />
-                <TextField source="phone"/>
+                <TextField source="id" style={styles.item} />
+                <EmailField source="email" style={styles.item}/>
+                <TextField source="firstName" style={styles.item}/>
+                <TextField source="lastName" style={styles.item}/>
+                <TextField source="phone" style={styles.item}/>
             </Tab>
             <Tab label="learning courses">
                 <ReferenceManyField addLabel={false} reference="learningCourses" target="users">

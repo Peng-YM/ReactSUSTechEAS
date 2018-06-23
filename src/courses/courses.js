@@ -23,6 +23,9 @@ import {
 } from 'react-admin';
 
 import RichTextInput from 'ra-input-rich-text';
+import BookIcon from '@material-ui/icons/Book';
+
+export const CourseIcon = BookIcon;
 
 export const CourseList = props => (
     <List {...props}>

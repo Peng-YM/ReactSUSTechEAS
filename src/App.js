@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { fetchUtils, Admin, Resource } from 'react-admin';
 import jsonHalRestProvider from 'ra-data-json-hal';
 import {UserList, UserIcon, UserEdit, UserCreate, UserShow} from './users/users';
-import {CourseList, CourseShow, CourseEdit, CourseCreate, CourseTitle} from './courses/courses';
+import {CourseList, CourseShow, CourseEdit, CourseCreate, CourseTitle, CourseIcon} from './courses/courses';
 import Dashboard from './Dashboard';
 import authProvider from './authProvider';
-import { ExamShow, ExamList, ExamEdit } from './exams/exam';
+import { ExamShow, ExamList, ExamEdit, ExamIcon } from './exams/exam';
+import './css/App.css';
 
 const httpClient = (url, options = {}) => {
   if (!options.headers) {
@@ -33,6 +34,7 @@ const App = () =>(
       edit={CourseEdit}
       options={{lable: "Courses"}}
       list={CourseList}
+      icon={CourseIcon}
       create={CourseCreate}
     />   
     <Resource
@@ -40,6 +42,7 @@ const App = () =>(
       show={ExamShow}
       edit={ExamEdit}
       list={ExamList}
+      icon={ExamIcon}
       options={{label: "Exams"}}
     />
   </Admin>
