@@ -5,9 +5,13 @@ import {
     SimpleShowLayout,
     TextField,
     Edit,
-    Datagrid
+    Datagrid,
+    List,
+    TabbedForm,
+    FormTab
 } from 'react-admin';
-import { List } from '@material-ui/core';
+
+import RichTextInput from 'ra-input-rich-text';
 
 export const ExamShow = props => (
     <Show {...props}>
@@ -19,7 +23,24 @@ export const ExamShow = props => (
 );
 
 export const ExamEdit = props => (
-    <Edit>
-        
+    <Edit {...props}>
+        <TabbedForm>
+            <FormTab label="summary">
+                <TextField source="id"/>
+                <TextField source="examName"/>
+            </FormTab>
+            <FormTab label="description">
+
+            </FormTab>
+        </TabbedForm>
     </Edit>
+);
+
+export const ExamList = props => (
+    <List {...props}>
+        <Datagrid>
+            <TextField source="id"/>
+            <TextField source="examName"/>
+        </Datagrid>
+    </List>
 );

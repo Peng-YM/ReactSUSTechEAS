@@ -18,17 +18,23 @@ import {
     required,
     Create,
     ReferenceManyField,
+    SingleFieldList,
+    ChipField
 } from 'react-admin';
 
 import RichTextInput from 'ra-input-rich-text';
 
 export const CourseList = props => (
-    <List {...props}
-        sort={{field: 'id', order: 'ASC'}}>
+    <List {...props}>
         <Datagrid>
             <TextField source="id" />
             <TextField source="courseCode" />
             <TextField source="courseName"/>
+            <ReferenceManyField label="Exams" reference="exams" target="courses">
+                <SingleFieldList>
+                    <ChipField source="examName"/>
+                </SingleFieldList>
+            </ReferenceManyField>
             <EditButton/>
             <ShowButton/>
         </Datagrid>
@@ -58,6 +64,20 @@ export const CourseShow = props => (
                         <TextField source="examName"/>
                         <EditButton/>
                         <ShowButton/>
+                    </Datagrid>
+                </ReferenceManyField>
+            </Tab>
+            <Tab label="teachers">
+                <ReferenceManyField addLabel={false} reference="teachers" target="courses">
+                    <Datagrid>
+                        <TextField source="id"/>
+                    </Datagrid>
+                </ReferenceManyField>
+            </Tab>
+            <Tab label="students">
+            <ReferenceManyField addLabel={false} reference="students" target="courses">
+                    <Datagrid>
+                        <TextField source="id"/>
                     </Datagrid>
                 </ReferenceManyField>
             </Tab>

@@ -5,7 +5,7 @@ import {UserList, UserIcon, UserEdit, UserCreate, UserShow} from './users/users'
 import {CourseList, CourseShow, CourseEdit, CourseCreate, CourseTitle} from './courses/courses';
 import Dashboard from './Dashboard';
 import authProvider from './authProvider';
-import { ExamShow, ExamList } from './exams/exam';
+import { ExamShow, ExamList, ExamEdit } from './exams/exam';
 
 const httpClient = (url, options = {}) => {
   if (!options.headers) {
@@ -38,6 +38,8 @@ const App = () =>(
     <Resource
       name="exams"
       show={ExamShow}
+      edit={ExamEdit}
+      list={ExamList}
       options={{label: "Exams"}}
     />
   </Admin>
