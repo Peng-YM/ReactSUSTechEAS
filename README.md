@@ -4,6 +4,7 @@
 ![](https://tokei.rs/b1/github/Peng-YM/ReactSUSTechEAS)
 ![](https://tokei.rs/b1/github/Peng-YM/ReactSUSTechEAS?category=files)
 ![](https://travis-ci.com/Peng-YM/ReactSUSTechEAS.svg?branch=master)
+[![CodeFactor](https://www.codefactor.io/repository/github/peng-ym/reactsustecheas/badge)](https://www.codefactor.io/repository/github/peng-ym/reactsustecheas)
 
 Eduction Administration System Front End based on React Admin.
 
