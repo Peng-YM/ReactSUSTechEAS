@@ -106,7 +106,7 @@ Table of Contents
 - Yarn
 - Dependencies(See `yarn.lock`)
 
-### 3.2 Installation
+### 3.2 Configuration
 	
 Install Yarn if it does not exist in your computer.
 
