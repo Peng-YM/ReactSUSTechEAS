@@ -19,11 +19,15 @@ import {
     Create,
     ReferenceManyField,
     SingleFieldList,
-    ChipField
+    ChipField,
+    EmailField,
+    DateField,
+    DateInput
 } from 'react-admin';
 
 import RichTextInput from 'ra-input-rich-text';
 import BookIcon from '@material-ui/icons/Book';
+import { UserList } from '../users/users';
 
 export const CourseIcon = BookIcon;
 
@@ -56,6 +60,8 @@ export const CourseShow = props => (
                 <TextField source="id" />
                 <TextField source="courseCode" />
                 <TextField source="courseName"/>
+                <DateField source="start"/>
+                <DateField source="end"/>
             </Tab>
             <Tab label="description">
                 <RichTextField source="description" addLabel={false}/>
@@ -65,22 +71,24 @@ export const CourseShow = props => (
                     <Datagrid>
                         <TextField source="id"/>
                         <TextField source="examName"/>
+                        <DateField source="date"/>
                         <EditButton/>
                         <ShowButton/>
                     </Datagrid>
                 </ReferenceManyField>
             </Tab>
-            <Tab label="teachers">
-                <ReferenceManyField addLabel={false} reference="teachers" target="courses">
+            <Tab label="users">
+                <ReferenceManyField addLabel={false} reference="users" target="courses">
                     <Datagrid>
                         <TextField source="id"/>
-                    </Datagrid>
-                </ReferenceManyField>
-            </Tab>
-            <Tab label="students">
-            <ReferenceManyField addLabel={false} reference="students" target="courses">
-                    <Datagrid>
-                        <TextField source="id"/>
+                        <EmailField source="email"/>
+                        <TextField source="firstName" />
+                        <TextField source="lastName" />
+                        <ReferenceManyField reference="roles" target="users" label="roles">
+                            <SingleFieldList>
+                                <ChipField source="name"/>
+                            </SingleFieldList>
+                        </ReferenceManyField>
                     </Datagrid>
                 </ReferenceManyField>
             </Tab>
@@ -95,6 +103,8 @@ export const CourseEdit = props => (
                 <DisabledInput label="Id" source="id"/>
                 <TextInput label="Course Code" source="courseCode" validate={required()}/>
                 <TextInput label="Course Name" source="courseName" validate={required()}/>
+                <DateInput label="Start" source="start"/>
+                <DateInput label="End" source="end"/>
             </FormTab>
             <FormTab label="description">
                 <RichTextInput source="description" addLabel={false}/>
@@ -107,8 +117,10 @@ export const CourseCreate = props => (
     <Create {...props}>
         <TabbedForm>
             <FormTab label="summary">
-                <TextInput label="Course Code" source="courseCode" />
-                <TextInput label="Course Name" source="courseName" />
+            <TextInput label="Course Code" source="courseCode" validate={required()}/>
+                <TextInput label="Course Name" source="courseName" validate={required()}/>
+                <DateInput label="Start" source="start"/>
+                <DateInput label="End" source="end"/>
             </FormTab>
             <FormTab label="summary">
                 <RichTextInput addLabel={false} source="decription"/>

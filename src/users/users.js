@@ -14,7 +14,9 @@ import {
     TabbedShowLayout,
     Show,
     Tab,
-    ReferenceManyField
+    ReferenceManyField,
+    ChipField,
+    SingleFieldList
 } from 'react-admin';
 import PeopleIcon from '@material-ui/icons/People';
 import { withStyles } from '@material-ui/core/styles';
@@ -34,6 +36,11 @@ export const UserList = props => (
             <TextField source="firstName" />
             <TextField source="lastName" />
             <TextField source="phone"/>
+            <ReferenceManyField reference="roles" target="users" label="Roles">
+                <SingleFieldList>
+                    <ChipField source="name"/>
+                </SingleFieldList>
+            </ReferenceManyField>
             <EditButton/>
             <ShowButton/>
         </Datagrid>
@@ -75,13 +82,10 @@ export const UserShow = props => (
                 <TextField source="lastName" />
                 <TextField source="phone" />
             </Tab>
-            <Tab label="learning courses">
-                <ReferenceManyField addLabel={false} reference="learningCourses" target="users">
+            <Tab label="courses">
+                <ReferenceManyField addLabel={false} reference="courses" target="users">
                     <CourseList/>
                 </ReferenceManyField>
-            </Tab>
-            <Tab label="teaching courses">
-                
             </Tab>
         </TabbedShowLayout>
     </Show>

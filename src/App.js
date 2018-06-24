@@ -45,6 +45,9 @@ const App = () =>(
       icon={ExamIcon}
       options={{label: "Exams"}}
     />
+    <Resource
+      name="roles"
+    />
   </Admin>
 );
 
