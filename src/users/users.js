@@ -17,7 +17,9 @@ import {
     ReferenceManyField,
     ChipField,
     SingleFieldList,
-    required
+    required,
+    ImageField,
+    ImageInput
 } from 'react-admin';
 import PeopleIcon from '@material-ui/icons/People';
 import { withStyles } from '@material-ui/core/styles';
@@ -51,6 +53,7 @@ export const UserList = props => (
 export const UserEdit = props => (
     <Edit title="Edit User Infomation" {...props}>
         <SimpleForm>
+            <ImageField source="avatar"/>
             <DisabledInput source="id"/>
             <EmailField source="email"/>
             <TextInput source="firstName" validate={required()}/>
@@ -63,10 +66,13 @@ export const UserEdit = props => (
 export const UserCreate = props => (
     <Create {...props}>
         <SimpleForm>
-            <TextInput source='email' validate={required()}/>
+            <ImageInput source="pictures" label="Avatar" accept="image/*" placeholder={<p>Drop your file here</p>}>
+                <ImageField source="src" title="title" />
+            </ImageInput>
+            <TextInput source='email' validate={required()} type="email"/>
             <TextInput source='firstName' validate={required()}/>
             <TextInput source='lastName' validate={required()}/>
-            <TextInput source='password' validate={required()}/>
+            <TextInput source='password' validate={required()} type="password"/>
             <TextInput source='phone'/>
         </SimpleForm>
     </Create>
