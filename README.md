@@ -3,6 +3,7 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ![](https://tokei.rs/b1/github/Peng-YM/ReactSUSTechEAS)
 ![](https://tokei.rs/b1/github/Peng-YM/ReactSUSTechEAS?category=files)
+![](https://travis-ci.com/Peng-YM/ReactSUSTechEAS.svg?branch=master)
 
 ## Introduction
 
