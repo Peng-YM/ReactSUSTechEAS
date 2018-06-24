@@ -91,7 +91,7 @@ The structure of the front end design contains three parts:
 ![Structure](images/structure.png)
 
 
-## Techniques
+## 2. Techniques
 
 - [x] React
 - [x] React-Admin
