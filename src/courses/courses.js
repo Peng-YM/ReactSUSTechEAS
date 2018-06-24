@@ -103,8 +103,8 @@ export const CourseEdit = props => (
                 <DisabledInput label="Id" source="id"/>
                 <TextInput label="Course Code" source="courseCode" validate={required()}/>
                 <TextInput label="Course Name" source="courseName" validate={required()}/>
-                <DateInput label="Start" source="start"/>
-                <DateInput label="End" source="end"/>
+                <DateInput label="Start" source="start" validate={required()}/>
+                <DateInput label="End" source="end" validate={required()}/>
             </FormTab>
             <FormTab label="description">
                 <RichTextInput source="description" addLabel={false}/>
@@ -119,11 +119,11 @@ export const CourseCreate = props => (
             <FormTab label="summary">
             <TextInput label="Course Code" source="courseCode" validate={required()}/>
                 <TextInput label="Course Name" source="courseName" validate={required()}/>
-                <DateInput label="Start" source="start"/>
-                <DateInput label="End" source="end"/>
+                <DateInput label="Start" source="start" validate={required()}/>
+                <DateInput label="End" source="end" validate={required()}/>
             </FormTab>
             <FormTab label="summary">
-                <RichTextInput addLabel={false} source="decription"/>
+                <RichTextInput addLabel={false} source="decription" validate={required()}/>
             </FormTab>
         </TabbedForm>
     </Create>

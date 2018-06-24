@@ -16,7 +16,8 @@ import {
     Tab,
     ReferenceManyField,
     ChipField,
-    SingleFieldList
+    SingleFieldList,
+    required
 } from 'react-admin';
 import PeopleIcon from '@material-ui/icons/People';
 import { withStyles } from '@material-ui/core/styles';
@@ -52,8 +53,8 @@ export const UserEdit = props => (
         <SimpleForm>
             <DisabledInput source="id"/>
             <EmailField source="email"/>
-            <TextInput source="firstName"/>
-            <TextInput source="lastName"/>
+            <TextInput source="firstName" validate={required()}/>
+            <TextInput source="lastName" validate={required()}/>
             <TextInput source="phone"/>
         </SimpleForm>
     </Edit>
@@ -62,10 +63,10 @@ export const UserEdit = props => (
 export const UserCreate = props => (
     <Create {...props}>
         <SimpleForm>
-            <TextInput source='email'/>
-            <TextInput source='firstName'/>
-            <TextInput source='lastName'/>
-            <TextInput source='password'/>
+            <TextInput source='email' validate={required()}/>
+            <TextInput source='firstName' validate={required()}/>
+            <TextInput source='lastName' validate={required()}/>
+            <TextInput source='password' validate={required()}/>
             <TextInput source='phone'/>
         </SimpleForm>
     </Create>
