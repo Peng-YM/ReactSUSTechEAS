@@ -98,7 +98,7 @@ Table of Contents
 - [x] Axios
 - [x] HAL Rest
 
-## 3. Start
+## 3. Installation
 
 ### 3.1 Prerequisites
 
