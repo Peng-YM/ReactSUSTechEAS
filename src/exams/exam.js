@@ -12,7 +12,6 @@ import {
     DateField
 } from 'react-admin';
 
-import RichTextInput from 'ra-input-rich-text';
 import AssementIcon from '@material-ui/icons/Assessment';
 
 

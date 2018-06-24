@@ -22,7 +22,6 @@ import {
     ImageInput
 } from 'react-admin';
 import PeopleIcon from '@material-ui/icons/People';
-import { withStyles } from '@material-ui/core/styles';
 import {AvatarField} from '../utils/customization';
 import { CourseList } from '../courses/courses.js';
 

@@ -27,7 +27,6 @@ import {
 
 import RichTextInput from 'ra-input-rich-text';
 import BookIcon from '@material-ui/icons/Book';
-import { UserList } from '../users/users';
 
 export const CourseIcon = BookIcon;
 
