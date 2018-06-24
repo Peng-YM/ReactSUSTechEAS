@@ -12,17 +12,17 @@ Table of Contents
 =================
 
 - [React EAS FrontEnd](#react-eas-frontend)
-	+ [Design](#design)
-		* [Style](#style)
-		* [Structure](#structure)
-		* [Layout](#layout)
-	+ [Techniques](#techniques)
-	+ [Installation](#installation)
-		* [Prerequisites](#prerequisites)
-		* [Configuration](#configuration)
-	+ [Development](#development)
-	+ [Demo](#demo)
-	+ [Team](#team)
+	+ [1. Design](#design)
+		* [1.1 Style](#style)
+		* [1.2 Structure](#structure)
+		* [1.3 Layout](#layout)
+	+ [2. Techniques](#techniques)
+	+ [3. Installation](#installation)
+		* [3.1 Prerequisites](#prerequisites)
+		* [3.2 Configuration](#configuration)
+	+ [4. Development](#development)
+	+ [5. Demo](#demo)
+	+ [6. Team](#team)
 - [License](#license)
 - [Reference](#reference)
 
@@ -153,7 +153,7 @@ Then run
 ```bash
 yarn start
 ```
-to start the program in `localhost:3000`
+to start the program, and open broswer to see `localhost:3000`
 
 or build by running
 
