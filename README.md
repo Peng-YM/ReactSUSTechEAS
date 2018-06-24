@@ -45,11 +45,9 @@ Table of Contents
 		+ JS
 	- Configuration
 
-	```
+```
 	.
 ├── README.md
-├── images
-│   └── structure.png
 ├── package-lock.json
 ├── package.json
 ├── public
@@ -80,7 +78,7 @@ Table of Contents
 └── yarn.lock
 
 10 directories, 23 files
-	```
+```
 
 3. Layout
 
@@ -162,22 +160,6 @@ or build by running
 ```
 yarn build
 ```
-
-
-**Note** that there is an error in the `node_module/ra-data-json-hal/lib/constants.js`, change the line from 
-
-```javascript
-var _constants = require('../constants');
-```
-
-to
-
-```javascript
-var _constants = require('./constants');
-```
-
-and run again.
-
 
 ## 4. Development
 
