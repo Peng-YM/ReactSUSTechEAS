@@ -48,8 +48,6 @@ Table of Contents
 ```
 	.
 ├── README.md
-├── images
-│   └── structure.png
 ├── package-lock.json
 ├── package.json
 ├── public
