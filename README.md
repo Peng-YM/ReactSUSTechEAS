@@ -28,11 +28,11 @@ Table of Contents
 
 ## 1. Design
 
-### 1.1 Style
+1. Style
 	
 	This front end uses the *material design* style. The material design style is popular front end style developed by **Google**. Details can be referred in [Material.io](https://material.io). 
 
-### 1.2 Structure
+2. Structure
 	
 	The file strcture mainly contains three parts: 
 	
@@ -80,7 +80,7 @@ Table of Contents
 10 directories, 23 files
 ```
 
-### 1.3 Layout
+3. Layout
 
 	The structure of the front end design contains three parts:
 	
@@ -196,8 +196,8 @@ The front end has a login entry and shows a dashboard after logging in. The data
 
 ## 6. Team
 
-- Yiming Peng: Back end and Front End
-- Yilin Zheng: Front end
+- @Peng-YM: Back end and Front End
+- @Spacebody: Front end
 
 ## License
 
