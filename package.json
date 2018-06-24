@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "eslint": "^5.0.0",
+    "jest-cli": "^23.1.0",
     "ra-input-rich-text": "^2.0.2",
     "react": "^16.4.1",
     "react-admin": "^2.0.3",
