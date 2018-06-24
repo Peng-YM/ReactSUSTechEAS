@@ -28,22 +28,22 @@ Table of Contents
 
 ## 1. Design
 
-1. Style
+### 1.1 Style
 	
-	This front end uses the *material design* style. The material design style is popular front end style developed by **Google**. Details can be referred in [Material.io](https://material.io). 
+This front end uses the *material design* style. The material design style is popular front end style developed by **Google**. Details can be referred in [Material.io](https://material.io). 
 
-2. Structure
+### 1.2 Structure
 	
-	The file strcture mainly contains three parts: 
+The file strcture mainly contains three parts: 
 	
-	- public
-		+ html
-		+ ico
-		+ manifest file
-	- src
-		+ CSS
-		+ JS
-	- Configuration
+- public
+	+ html
+	+ ico
+	+ manifest file
+- src
+	+ CSS
+	+ JS
+- Configuration
 
 ```
 	.
@@ -80,15 +80,15 @@ Table of Contents
 10 directories, 23 files
 ```
 
-3. Layout
+### 1.3 Layout
 
-	The structure of the front end design contains three parts:
+The structure of the front end design contains three parts:
 	
-	+ Top bar
-	+ Menu
-	+ Pages
++ Top bar
++ Menu
++ Pages
 
-	![Structure](images/structure.png)
+![Structure](images/structure.png)
 
 
 ## Techniques
