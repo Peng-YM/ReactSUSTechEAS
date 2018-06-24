@@ -3346,6 +3346,15 @@ gzip-size@3.0.0:
   dependencies:
     duplexer "^0.1.1"
 
+hal-json-data-provider@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/hal-json-data-provider/-/hal-json-data-provider-1.0.0.tgz#ed77a9f0e42a9c85642cad666c88ce8dba4e4527"
+  dependencies:
+    query-string "~5.1.1"
+    react "^16.3.2"
+    react-admin "^2.0.0-beta4"
+    react-dom "^16.3.2"
+
 handle-thing@^1.2.5:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/handle-thing/-/handle-thing-1.2.5.tgz#fd7aad726bf1a5fd16dfc29b2f7a6601d27139c4"
@@ -6394,15 +6403,6 @@ ra-core@^2.0.3:
     redux-saga "~0.16.0"
     reselect "~3.0.0"
     warning "~3.0.0"
-
-ra-data-json-hal@^1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/ra-data-json-hal/-/ra-data-json-hal-1.0.7.tgz#2e2d01e14fd85cbe3fd87b3923c4a078523c2edd"
-  dependencies:
-    query-string "~5.1.1"
-    react "^16.3.2"
-    react-admin "^2.0.0-beta4"
-    react-dom "^16.3.2"
 
 ra-input-rich-text@^2.0.2:
   version "2.0.2"

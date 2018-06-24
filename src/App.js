@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { fetchUtils, Admin, Resource } from 'react-admin';
-import jsonHalRestProvider from 'ra-data-json-hal';
+import jsonHalRestProvider from 'hal-json-data-provider';
 import {UserList, UserIcon, UserEdit, UserCreate, UserShow} from './users/users';
 import {CourseList, CourseShow, CourseEdit, CourseCreate, CourseTitle, CourseIcon} from './courses/courses';
 import Dashboard from './Dashboard';
