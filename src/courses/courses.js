@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import {
     List,
     Datagrid,
@@ -25,19 +24,9 @@ import {
     DateInput
 } from 'react-admin';
 
-import {getUsers} from '../utils/api';
-
+import StudentsManager from './studentsManager';
 import RichTextInput from 'ra-input-rich-text';
 import BookIcon from '@material-ui/icons/Book';
-import Button from '@material-ui/core/Button';
-import {List as OriginalList} from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
-import Checkbox from '@material-ui/core/Checkbox';
-import Avatar from '@material-ui/core/Avatar';
-
-
 
 export const CourseIcon = BookIcon;
 
@@ -128,11 +117,8 @@ export const CourseEdit = props => (
             <FormTab label="description">
                 <RichTextInput source="description" addLabel={false}/>
             </FormTab>
-            <FormTab label="students">
-                <CourseStudents />
-            </FormTab>
-            <FormTab label="test">
-                <CourseStudents />
+            <FormTab label="students" onClick={event=>console.log("Clicked!")}>
+                <CourseStudents/>
             </FormTab>
         </TabbedForm>
     </Edit>
@@ -155,18 +141,9 @@ export const CourseCreate = props => (
 );
 
 const CourseStudents = ({record}) => {
-    const classes = PropTypes.object.isRequired;
-    const courseId = record.id;
     return (
-        <div className={classes.root}>
-
-            <Button variant="raised" color="secondary" 
-                className={classes.button} 
-                onClick={
-                    event=>{
-                        getUsers().then(res => console.log(res))
-                    }
-                }>CONFIRM</Button>
+        <div>
+            <StudentsManager source={record}/>
         </div>
     );
 };
