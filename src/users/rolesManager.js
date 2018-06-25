@@ -1,46 +1,69 @@
 import React, { Component } from 'react';
-import {getList, getManyReference, isIdExists} from '../utils/api';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
+import {getList, getManyReference, isIdExists, setManyReference} from '../utils/api';
 import Checkbox from '@material-ui/core/Checkbox';
-import Avatar from '@material-ui/core/Avatar';
-import _ from "underscore";
+import PropTypes from 'prop-types';
+import List from '@material-ui/core/List'; 
+import ListItem from '@material-ui/core/ListItem'; 
+import ListItemText from '@material-ui/core/ListItemText';
 
-
-export default class RolesManager extends Component{
+class RolesManager extends Component{
     constructor(props){
         super(props);
         this.users = props.source;
         this.state = {
             // all users
             roles: [],
-            // users that already choose this course
-            chosen: []
+             // roles selected to assign to users
+            selected: [],
         };
     }
 
     componentDidMount(){
         getList("roles")
             .then(roles => this.setState({roles: roles}));
-        // get user that already choose this course
-        getManyReference("courses", "roles", this.course)
-            .then(chosen => this.setState({chosen: chosen[0]}));                                
+        // get user that already choose the roles
+        getManyReference("users", "roles", this.users)
+            .then(selected => this.setState({selected: selected[0]}));
     }
 
     render(){
-        const roleList = this.state.role.map(((role) => (
-            <Checkbox value={role.name} checked={true}/>
+        const roleList = this.state.roles.map(((role) => ( 
+            <ListItem>   
+            <Checkbox key={role.id}
+                onChange={
+                    (role) => { 
+                        let index = isIdExists(this.state.selected, role.id);
+                        if (index === -1) {
+                            let temp = this.state.selected.slice();
+                                temp.push(role);
+                                this.setState({selected: temp}, this.submit);
+                        }
+                        else if (index !== -1) {
+                            let temp = this.state.selected.slice();
+                            temp.splice(index, 1);
+                            this.setState({selected: temp}, this.submit);
+                        }
+                    }
+                }
+                checked={isIdExists(this.state.selected, role.id) !== -1 ? true : false}
+            />
+            <ListItemText primary={role.name} />
+           </ListItem>
         )));
         return (
-            <List>
-                {studentList}
-            </List>
+        <List>
+            {roleList}
+        </List>
         );
     }
 
     submit(){
-        console.log(this.state.chosen);
+        setManyReference("roles", this.users, this.state.selected);  
     }
 }
+
+RolesManager.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default RolesManager;
