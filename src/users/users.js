@@ -73,6 +73,7 @@ export const UserCreate = props => (
             <TextInput source='lastName' validate={required()}/>
             <TextInput source='password' validate={required()} type="password"/>
             <TextInput source='phone'/>
+            
         </SimpleForm>
     </Create>
 );

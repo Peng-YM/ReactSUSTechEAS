@@ -48,6 +48,9 @@ const App = () =>(
     <Resource
       name="roles"
     />
+    <Resource
+      name="resources"
+    />
   </Admin>
 );
 

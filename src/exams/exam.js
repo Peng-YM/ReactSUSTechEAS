@@ -9,7 +9,9 @@ import {
     List,
     TabbedForm,
     FormTab,
-    DateField
+    DateField,
+    EditButton,
+    ShowButton,
 } from 'react-admin';
 
 import AssementIcon from '@material-ui/icons/Assessment';
@@ -48,6 +50,8 @@ export const ExamList = props => (
             <TextField source="id"/>
             <TextField source="examName"/>
             <DateField source="date"/>
+            <ShowButton/>
+            <EditButton/>
         </Datagrid>
     </List>
 );

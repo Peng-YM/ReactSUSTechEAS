@@ -1,5 +1,5 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import {
     List,
     Datagrid,
@@ -25,8 +25,19 @@ import {
     DateInput
 } from 'react-admin';
 
+import {getUsers} from '../utils/api';
+
 import RichTextInput from 'ra-input-rich-text';
 import BookIcon from '@material-ui/icons/Book';
+import Button from '@material-ui/core/Button';
+import {List as OriginalList} from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListItemText from '@material-ui/core/ListItemText';
+import Checkbox from '@material-ui/core/Checkbox';
+import Avatar from '@material-ui/core/Avatar';
+
+
 
 export const CourseIcon = BookIcon;
 
@@ -71,7 +82,6 @@ export const CourseShow = props => (
                         <TextField source="id"/>
                         <TextField source="examName"/>
                         <DateField source="date"/>
-                        <EditButton/>
                         <ShowButton/>
                     </Datagrid>
                 </ReferenceManyField>
@@ -88,6 +98,16 @@ export const CourseShow = props => (
                                 <ChipField source="name"/>
                             </SingleFieldList>
                         </ReferenceManyField>
+                        <ShowButton/>
+                    </Datagrid>
+                </ReferenceManyField>
+            </Tab>
+            <Tab label="resources">
+                <ReferenceManyField addLabel={false} reference="resources" target="courses">
+                    <Datagrid>
+                        <TextField source="id"/>
+                        <TextField source="name"/>
+                        <TextField source="link"/>
                     </Datagrid>
                 </ReferenceManyField>
             </Tab>
@@ -108,6 +128,12 @@ export const CourseEdit = props => (
             <FormTab label="description">
                 <RichTextInput source="description" addLabel={false}/>
             </FormTab>
+            <FormTab label="students">
+                <CourseStudents />
+            </FormTab>
+            <FormTab label="test">
+                <CourseStudents />
+            </FormTab>
         </TabbedForm>
     </Edit>
 );
@@ -127,3 +153,20 @@ export const CourseCreate = props => (
         </TabbedForm>
     </Create>
 );
+
+const CourseStudents = ({record}) => {
+    const classes = PropTypes.object.isRequired;
+    const courseId = record.id;
+    return (
+        <div className={classes.root}>
+
+            <Button variant="raised" color="secondary" 
+                className={classes.button} 
+                onClick={
+                    event=>{
+                        getUsers().then(res => console.log(res))
+                    }
+                }>CONFIRM</Button>
+        </div>
+    );
+};
