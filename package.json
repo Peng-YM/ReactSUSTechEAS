@@ -10,7 +10,9 @@
     "ra-input-rich-text": "^2.0.2",
     "react": "^16.4.1",
     "react-admin": "^2.0.3",
+    "react-admin-date-inputs": "^1.0.14",
     "react-dom": "^16.4.1",
+    "react-dropzone": "^4.2.11",
     "react-scripts": "1.1.4",
     "underscore": "^1.9.1"
   },

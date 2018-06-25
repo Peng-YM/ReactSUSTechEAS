@@ -21,12 +21,12 @@ import {
     ChipField,
     EmailField,
     DateField,
-    DateInput
 } from 'react-admin';
-
+import { DateInput } from 'react-admin-date-inputs';
 import StudentsManager from './studentsManager';
 import RichTextInput from 'ra-input-rich-text';
 import BookIcon from '@material-ui/icons/Book';
+import ResourcesManager from './resourcesManager';
 
 export const CourseIcon = BookIcon;
 
@@ -111,14 +111,17 @@ export const CourseEdit = props => (
                 <DisabledInput label="Id" source="id"/>
                 <TextInput label="Course Code" source="courseCode" validate={required()}/>
                 <TextInput label="Course Name" source="courseName" validate={required()}/>
-                <DateInput label="Start" source="start" validate={required()}/>
-                <DateInput label="End" source="end" validate={required()}/>
+                <DateInput label="Start" source="start" validate={required()} options={{format:'yyyy-MM-dd'}}/>
+                <DateInput label="End" source="end" validate={required()} options={{format:'yyyy-MM-dd'}}/>
             </FormTab>
             <FormTab label="description">
                 <RichTextInput source="description" addLabel={false}/>
             </FormTab>
-            <FormTab label="students" onClick={event=>console.log("Clicked!")}>
+            <FormTab label="students">
                 <CourseStudents/>
+            </FormTab>
+            <FormTab label="resources">
+                <CourseResources/>
             </FormTab>
         </TabbedForm>
     </Edit>
@@ -130,11 +133,11 @@ export const CourseCreate = props => (
             <FormTab label="summary">
             <TextInput label="Course Code" source="courseCode" validate={required()}/>
                 <TextInput label="Course Name" source="courseName" validate={required()}/>
-                <DateInput label="Start" source="start" validate={required()}/>
-                <DateInput label="End" source="end" validate={required()}/>
+                <DateInput label="Start" source="start" validate={required()} options={{format:'yyyy-MM-dd'}}/>
+                <DateInput label="End" source="end" validate={required()} options={{format:'yyyy-MM-dd'}}/>
             </FormTab>
             <FormTab label="summary">
-                <RichTextInput addLabel={false} source="decription" validate={required()}/>
+                <RichTextInput addLabel={false} source="decription"/>
             </FormTab>
         </TabbedForm>
     </Create>
@@ -144,6 +147,14 @@ const CourseStudents = ({record}) => {
     return (
         <div>
             <StudentsManager source={record}/>
+        </div>
+    );
+};
+
+const CourseResources = ({record}) => {
+    return (
+        <div>
+            <ResourcesManager source={record}/>
         </div>
     );
 };

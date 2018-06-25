@@ -1,6 +1,5 @@
 import axios from 'axios';
 import _ from 'underscore';
-
 axios.defaults.baseURL = "http://10.20.20.126:8080";
 const config = {
     withCredentials: true
@@ -46,7 +45,6 @@ export function getManyReference(resourceName, targetName, source){
 export function setManyReference(targetName, source, targets){
     let body = targets.map(target => target._links.self.href).join("\n");
     let rel = source._links[targetName].href;
-
     console.log(rel);
     console.log(body);
     return axios.put(rel, body, {
@@ -65,4 +63,27 @@ export function isIdExists(list, id){
         }
     }
     return result;
+}
+
+export function uploadCourseFiles(course, files){
+    const formData = new FormData();
+    _.each(files, file => formData.append("files", file));
+    return axios.post('uploadMultiples', formData, {
+        withCredentials: true,
+        headers: {
+            'Content-Type': 'multipart/form-data',
+            "X-Requested-With": "XMLHttpRequest"
+        }
+    })
+    .then(res => res.data)
+    .then(resources => {
+        resources.map(item => item._links = {
+            "self": {
+                "href": `${axios.defaults.baseURL}/resources/${item.id}`
+            }
+        });
+        return resources;
+        
+    })
+    .then(resources => setManyReference("resources", course, resources));
 }
