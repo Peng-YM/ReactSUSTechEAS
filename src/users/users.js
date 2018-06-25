@@ -24,6 +24,7 @@ import {
 import PeopleIcon from '@material-ui/icons/People';
 import {AvatarField} from '../utils/customization';
 import { CourseList } from '../courses/courses.js';
+import Checkbox from '@material-ui/core/Checkbox';
 
 export const UserIcon = PeopleIcon;
 
@@ -58,6 +59,7 @@ export const UserEdit = props => (
             <TextInput source="firstName" validate={required()}/>
             <TextInput source="lastName" validate={required()}/>
             <TextInput source="phone"/>
+            
         </SimpleForm>
     </Edit>
 );
@@ -73,7 +75,6 @@ export const UserCreate = props => (
             <TextInput source='lastName' validate={required()}/>
             <TextInput source='password' validate={required()} type="password"/>
             <TextInput source='phone'/>
-            
         </SimpleForm>
     </Create>
 );
@@ -99,3 +100,10 @@ export const UserShow = props => (
 );
 
 
+export const UserRoles = ({record}) => {
+    return (
+        <div>
+        
+        </div>
+    );
+}
