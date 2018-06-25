@@ -4,6 +4,7 @@
 ![](https://tokei.rs/b1/github/Peng-YM/ReactSUSTechEAS)
 ![](https://tokei.rs/b1/github/Peng-YM/ReactSUSTechEAS?category=files)
 ![](https://travis-ci.com/Peng-YM/ReactSUSTechEAS.svg?branch=master)
+[![CodeFactor](https://www.codefactor.io/repository/github/peng-ym/reactsustecheas/badge)](https://www.codefactor.io/repository/github/peng-ym/reactsustecheas)
 
 Eduction Administration System Front End based on React Admin.
 
@@ -12,38 +13,38 @@ Table of Contents
 =================
 
 - [React EAS FrontEnd](#react-eas-frontend)
-	+ [Design](#design)
-		* [Style](#style)
-		* [Structure](#structure)
-		* [Layout](#layout)
-	+ [Techniques](#techniques)
-	+ [Installation](#installation)
-		* [Prerequisites](#prerequisites)
-		* [Configuration](#configuration)
-	+ [Development](#development)
-	+ [Demo](#demo)
-	+ [Team](#team)
+	+ [1. Design](#1-design)
+		* [1.1 Style](#11-style)
+		* [1.2 Structure](#12-structure)
+		* [1.3 Layout](#13-layout)
+	+ [2. Techniques](#2-techniques)
+	+ [3. Installation](#3-installation)
+		* [3.1 Prerequisites](#31-prerequisites)
+		* [3.2 Configuration](#32-configuration)
+	+ [4. Development](#4-development)
+	+ [5. Demo](#5-demo)
+	+ [6. Team](#6-team)
 - [License](#license)
 - [Reference](#reference)
 
 ## 1. Design
 
-1. Style
+### 1.1 Style
 	
-	This front end uses the *material design* style. The material design style is popular front end style developed by **Google**. Details can be referred in [Material.io](https://material.io). 
+This front end uses the *material design* style. The material design style is popular front end style developed by **Google**. Details can be referred in [Material.io](https://material.io). 
 
-2. Structure
+### 1.2 Structure
 	
-	The file strcture mainly contains three parts: 
+The file strcture mainly contains three parts: 
 	
-	- public
-		+ html
-		+ ico
-		+ manifest file
-	- src
-		+ CSS
-		+ JS
-	- Configuration
+- public
+	+ html
+	+ ico
+	+ manifest file
+- src
+	+ CSS
+	+ JS
+- Configuration
 
 ```
 	.
@@ -80,25 +81,25 @@ Table of Contents
 10 directories, 23 files
 ```
 
-3. Layout
+### 1.3 Layout
 
-	The structure of the front end design contains three parts:
+The structure of the front end design contains three parts:
 	
-	+ Top bar
-	+ Menu
-	+ Pages
++ Top bar
++ Menu
++ Pages
 
-	![Structure](images/structure.png)
+![Structure](images/structure.png)
 
 
-## Techniques
+## 2. Techniques
 
 - [x] React
 - [x] React-Admin
 - [x] Axios
 - [x] HAL Rest
 
-## 3. Start
+## 3. Installation
 
 ### 3.1 Prerequisites
 
@@ -106,7 +107,7 @@ Table of Contents
 - Yarn
 - Dependencies(See `yarn.lock`)
 
-### 3.2 Installation
+### 3.2 Configuration
 	
 Install Yarn if it does not exist in your computer.
 
@@ -153,7 +154,7 @@ Then run
 ```bash
 yarn start
 ```
-to start the program in `localhost:3000`
+to start the program, and open broswer to see `localhost:3000`
 
 or build by running
 
@@ -196,8 +197,8 @@ The front end has a login entry and shows a dashboard after logging in. The data
 
 ## 6. Team
 
-- Yiming Peng: Back end and Front End
-- Yilin Zheng: Front end
+- @Peng-YM: Back end and Front End
+- @Spacebody: Front end
 
 ## License
 
