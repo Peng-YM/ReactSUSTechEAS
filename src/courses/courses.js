@@ -117,7 +117,7 @@ export const CourseEdit = props => (
             <FormTab label="description">
                 <RichTextInput source="description" addLabel={false}/>
             </FormTab>
-            <FormTab label="students" onClick={event=>console.log("Clicked!")}>
+            <FormTab label="users">
                 <CourseStudents/>
             </FormTab>
         </TabbedForm>
