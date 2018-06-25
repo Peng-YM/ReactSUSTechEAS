@@ -23,8 +23,6 @@ import {
 } from 'react-admin';
 import PeopleIcon from '@material-ui/icons/People';
 import {AvatarField} from '../utils/customization';
-import { CourseList } from '../courses/courses.js';
-import Checkbox from '@material-ui/core/Checkbox';
 
 export const UserIcon = PeopleIcon;
 
@@ -92,7 +90,12 @@ export const UserShow = props => (
             </Tab>
             <Tab label="courses">
                 <ReferenceManyField addLabel={false} reference="courses" target="users">
-                    <CourseList/>
+                    <Datagrid>
+                        <TextField source="id" />
+                        <TextField source="courseCode" />
+                        <TextField source="courseName"/>
+                        <ShowButton/>
+                    </Datagrid>   
                 </ReferenceManyField>
             </Tab>
         </TabbedShowLayout>

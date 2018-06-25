@@ -55,6 +55,25 @@ export function setManyReference(targetName, source, targets){
     });
 }
 
+export function setOneReference(targetName, source, target){
+    let body = target._links.self.href;
+    let rel = source._links[targetName].href;
+    console.log(rel);
+    console.log(body);
+    return axios.put(rel, body, {
+        withCredentials: true,
+        headers: {
+            'Content-Type': 'text/uri-list'
+        }
+    });
+}
+
+export function deleteOneReference(targetName, source){
+    let rel = source._links[targetName].href;
+    console.log(rel);
+    return axios.delete(rel, config);
+}
+
 export function isIdExists(list, id){
     var result = -1;
     for(let i = 0; i < list.length; i++){
@@ -75,15 +94,17 @@ export function uploadCourseFiles(course, files){
             "X-Requested-With": "XMLHttpRequest"
         }
     })
-    .then(res => res.data)
-    .then(resources => {
-        resources.map(item => item._links = {
-            "self": {
-                "href": `${axios.defaults.baseURL}/resources/${item.id}`
-            }
+    .then(res => {
+        const resources = res.data;
+        const requests = [];
+        _.each(resources, resource => {
+            resource._links = {
+                "course": {
+                    "href": `${axios.defaults.baseURL}/resources/${resource.id}/course`
+                }
+            };
+            requests.push(setOneReference("course", resource, course));
         });
-        return resources;
-        
-    })
-    .then(resources => setManyReference("resources", course, resources));
+        return axios.all(requests);
+    });
 }
