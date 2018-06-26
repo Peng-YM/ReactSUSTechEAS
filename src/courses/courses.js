@@ -22,7 +22,9 @@ import {
     EmailField,
     DateField,
 } from 'react-admin';
-import { DateInput } from 'react-admin-date-inputs';
+import {
+    DateInput
+} from 'react-admin-date-inputs';
 import StudentsManager from './studentsManager';
 import RichTextInput from 'ra-input-rich-text';
 import BookIcon from '@material-ui/icons/Book';
@@ -115,7 +117,7 @@ export const CourseEdit = props => (
                 <DateInput label="End" source="end" validate={required()} options={{format:'yyyy-MM-dd'}}/>
             </FormTab>
             <FormTab label="description">
-                <RichTextInput source="description" addLabel={false}/>
+                <RichTextInput source="description" addLabel={false} validate={required()}/>
             </FormTab>
             <FormTab label="users">
                 <CourseStudents/>

@@ -63,8 +63,8 @@ const App = () =>(
       edit={ExamEdit}
       options={{label: "Exams"}} 
       list={ExamList}
-      icon={ExamIcon}
-      create={ExamCreate}/>
+      create={ExamCreate}
+      icon={ExamIcon}/>
     <Resource
       name="roles"/>
     <Resource
