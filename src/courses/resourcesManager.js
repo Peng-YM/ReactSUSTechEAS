@@ -1,12 +1,19 @@
-import React, { Component } from "react";
+import React, {
+  Component
+} from "react";
 import Button from '@material-ui/core/Button';
-import {uploadCourseFiles, getManyReference} from '../utils/api';
+import {
+  uploadCourseFiles,
+  getManyReference
+} from '../utils/api';
 import DropZone from 'react-dropzone';
 
 
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import {
+  withStyles
+} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -21,15 +28,19 @@ import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import FilterListIcon from '@material-ui/icons/FilterList';
-import { lighten } from '@material-ui/core/styles/colorManipulator';
+import {
+  lighten
+} from '@material-ui/core/styles/colorManipulator';
 import Checkbox from '@material-ui/core/Checkbox';
-import {Link} from 'react-router-dom';
+import {
+  Link
+} from 'react-router-dom';
 
 
 function getSorting(order, orderBy) {
-    return order === 'desc' ?
-        (a, b) => (b[orderBy] < a[orderBy] ? -1 : 1):
-        (a, b) => (a[orderBy] < b[orderBy] ? -1 : 1);
+  return order === 'desc' ?
+    (a, b) => (b[orderBy] < a[orderBy] ? -1 : 1) :
+    (a, b) => (a[orderBy] < b[orderBy] ? -1 : 1);
 }
 
 
@@ -91,12 +102,12 @@ class EnhancedTableHead extends React.Component {
 }
 
 EnhancedTableHead.propTypes = {
-    numSelected: PropTypes.number.isRequired,
-    onRequestSort: PropTypes.func.isRequired,
-    onSelectAllClick: PropTypes.func.isRequired,
-    order: PropTypes.string.isRequired,
-    orderBy: PropTypes.string.isRequired,
-    rowCount: PropTypes.number.isRequired,
+  numSelected: PropTypes.number.isRequired,
+  onRequestSort: PropTypes.func.isRequired,
+  onSelectAllClick: PropTypes.func.isRequired,
+  order: PropTypes.string.isRequired,
+  orderBy: PropTypes.string.isRequired,
+  rowCount: PropTypes.number.isRequired,
 };
 
 const toolbarStyles = theme => ({
@@ -186,11 +197,11 @@ const styles = theme => ({
 
 
 var buttonStyle = {
-    width: "100%"
+  width: "100%"
 }
 
 var cardStyle = {
-    height: "200px"
+  height: "200px"
 }
 
 class ResourcesManager extends Component{
