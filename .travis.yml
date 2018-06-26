@@ -1,4 +1,4 @@
-warnings_ara_errors: false
+warnings_are_errors: false
 language: node_js
 node_js:
   - "stable"
