@@ -331,7 +331,6 @@ class StudentManager extends Component{
 
     submit(){
         setManyReference("users", this.course, this.state.selected);
-        
     }
 }
 

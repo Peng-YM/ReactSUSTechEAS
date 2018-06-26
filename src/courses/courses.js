@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
     List,
     Datagrid,
@@ -105,7 +105,7 @@ export const CourseShow = props => (
 );
 
 export const CourseEdit = props => (
-    <Edit {...props}>
+    <Edit title={<CourseTitle/>} {...props}>
         <TabbedForm>
             <FormTab label="summary">
                 <DisabledInput label="Id" source="id"/>
@@ -128,7 +128,7 @@ export const CourseEdit = props => (
 );
 
 export const CourseCreate = props => (
-    <Create {...props}>
+    <Create title={<CourseTitle/>} {...props}>
         <TabbedForm>
             <FormTab label="summary">
             <TextInput label="Course Code" source="courseCode" validate={required()}/>

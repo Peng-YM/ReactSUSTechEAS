@@ -18,8 +18,7 @@ import {
     ChipField,
     SingleFieldList,
     required,
-    ImageField,
-    ImageInput
+    ImageField
 } from 'react-admin';
 import PeopleIcon from '@material-ui/icons/People';
 import {AvatarField} from '../utils/customization';
@@ -27,13 +26,17 @@ import RolesManager from './rolesManager';
 
 export const UserIcon = PeopleIcon;
 
+export const UserTitle = ({record}) => {
+    return (<span>{record ? `${record.firstName}  ${record.lastName}` : ''}</span>);
+};
+
 export const UserList = props => (
     <List 
         {...props}
         sort={{field: 'id', order: 'ASC'}}>
         <Datagrid hover={false}>
-            <TextField source="id" />
             <AvatarField source = "avatar" />
+            <TextField source="id" />
             <EmailField source="email" />
             <TextField source="firstName" />
             <TextField source="lastName" />
@@ -50,9 +53,10 @@ export const UserList = props => (
 );
 
 export const UserEdit = props => (
-    <Edit title="Edit User Infomation" {...props}>
+    <Edit title={<UserTitle/>} {...props}>
         <SimpleForm>
-            <ImageField source="avatar"/>
+            <ImageField source = "avatar" label="Avatar"/>
+            <TextField source="id" />
             <DisabledInput source="id"/>
             <EmailField source="email"/>
             <TextInput source="firstName" validate={required()}/>
@@ -66,9 +70,8 @@ export const UserEdit = props => (
 export const UserCreate = props => (
     <Create {...props}>
         <SimpleForm>
-            <ImageInput source="pictures" label="Avatar" accept="image/*" placeholder={<p>Drop your file here</p>}>
-                <ImageField source="src" title="title" />
-            </ImageInput>
+            <ImageField source='avatar' label="Avatar"/>
+            <TextInput source='avatar' label="Avatar"/>
             <TextInput source='email' validate={required()} type="email"/>
             <TextInput source='firstName' validate={required()}/>
             <TextInput source='lastName' validate={required()}/>
@@ -80,9 +83,10 @@ export const UserCreate = props => (
 
 
 export const UserShow = props => (
-    <Show {...props} title = {<AvatarField size="60" />}>
+    <Show title={<UserTitle/>} {...props}>
         <TabbedShowLayout>
             <Tab label="summary">
+                <ImageField source='avatar' label="Avatar"/>
                 <TextField source="id"  />
                 <EmailField source="email" />
                 <TextField source="firstName"/>
@@ -98,6 +102,9 @@ export const UserShow = props => (
                         <ShowButton/>
                     </Datagrid>   
                 </ReferenceManyField>
+            </Tab>
+            <Tab label="marks">
+                
             </Tab>
         </TabbedShowLayout>
     </Show>

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Button from '@material-ui/core/Button';
 import {uploadCourseFiles} from '../utils/api';
 import DropZone from 'react-dropzone';
-import _ from 'underscore';
 
 
 var buttonStyle = {

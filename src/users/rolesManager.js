@@ -31,7 +31,7 @@ class RolesManager extends Component{
             <ListItem>   
             <Checkbox key={role.id}
                 onChange={
-                    (role) => { 
+                    (event) => { 
                         let index = isIdExists(this.state.selected, role.id);
                         if (index === -1) {
                             let temp = this.state.selected.slice();
