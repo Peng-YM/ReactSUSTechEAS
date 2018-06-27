@@ -130,7 +130,7 @@ export const CourseEdit = props => (
 );
 
 export const CourseCreate = props => (
-    <Create title={<CourseTitle/>} {...props}>
+    <Create {...props}>
         <TabbedForm>
             <FormTab label="summary">
             <TextInput label="Course Code" source="courseCode" validate={required()}/>

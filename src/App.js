@@ -29,6 +29,7 @@ import {
 } from './exams/exams';
 import DashBoard from './Dashboard';
 import './css/App.css';
+import { ResourceList } from './resources/resources';
 
 const httpClient = (url, options = {}) => {
   if (!options.headers) {
@@ -68,7 +69,9 @@ const App = () =>(
     <Resource
       name="roles"/>
     <Resource
-      name="resources"/>
+      name="resources"
+      list={ResourceList}
+      />
   </Admin>
 );
 
