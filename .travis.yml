@@ -1,4 +1,4 @@
-warnings_ara_errors: false
+warnings_are_errors: false
 language: node_js
 node_js:
   - "stable"
@@ -6,6 +6,7 @@ cache:
   directories:
   - node_modules
 script:
+  - unset CI
   - npm install
   - npm run build
 deploy:
