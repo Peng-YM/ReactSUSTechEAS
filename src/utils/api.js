@@ -87,7 +87,7 @@ export function isIdExists(list, id){
 export function uploadCourseFiles(course, files){
     const formData = new FormData();
     _.each(files, file => formData.append("files", file));
-    return axios.post('uploadMultiples', formData, {
+    return axios.post('upload', formData, {
         withCredentials: true,
         headers: {
             'Content-Type': 'multipart/form-data',

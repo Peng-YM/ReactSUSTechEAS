@@ -56,7 +56,7 @@ export const UserEdit = props => (
     <Edit title={<UserTitle/>} {...props}>
         <SimpleForm>
             <ImageField source = "avatar" label="Avatar"/>
-            <TextField source="id" />
+            <TextInput source="avatar" />
             <DisabledInput source="id"/>
             <EmailField source="email"/>
             <TextInput source="firstName" validate={required()}/>
@@ -102,9 +102,6 @@ export const UserShow = props => (
                         <ShowButton/>
                     </Datagrid>   
                 </ReferenceManyField>
-            </Tab>
-            <Tab label="marks">
-                
             </Tab>
         </TabbedShowLayout>
     </Show>

@@ -21,6 +21,7 @@ import {
     ChipField,
     EmailField,
     DateField,
+    UrlField
 } from 'react-admin';
 import {
     DateInput
@@ -30,6 +31,7 @@ import RichTextInput from 'ra-input-rich-text';
 import BookIcon from '@material-ui/icons/Book';
 import ResourcesManager from './resourcesManager';
 import ExamsManager from './examsManager';
+import {SizeField} from '../resources/resources';
 
 export const CourseIcon = BookIcon;
 
@@ -97,9 +99,10 @@ export const CourseShow = props => (
             <Tab label="resources">
                 <ReferenceManyField addLabel={false} reference="resources" target="courses">
                     <Datagrid>
-                        <TextField source="id"/>
-                        <TextField source="name"/>
-                        <TextField source="link"/>
+                        <TextField source="name" />
+                        <UrlField source="url" />
+                        <TextField source="fileType"/>
+                        <SizeField source="size"/>
                     </Datagrid>
                 </ReferenceManyField>
             </Tab>

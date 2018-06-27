@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {getList, getManyReference, isIdExists, setManyReference} from '../utils/api';
+import {getList, getManyReference, isIdExists, setOneReference, deleteOneReference} from '../utils/api';
 import Checkbox from '@material-ui/core/Checkbox';
 
 
@@ -246,7 +246,6 @@ class ExamsManager extends Component{
     render(){
         const classes = this.props;
         const { exams, order, orderBy, page, rowsPerPage, selected } = this.state;
-        console.log(exams);
         const emptyRows = rowsPerPage - Math.min(rowsPerPage, exams.length - page * rowsPerPage);
         return (
             <Paper className={classes.root}>
@@ -283,11 +282,13 @@ class ExamsManager extends Component{
                                     let index = isIdExists(selected, exam.id);
                                     if (index === -1) {
                                         selected.push(exam);
-                                        this.setState({selected: selected}, this.submit);
+                                        this.add(exam);
+                                        this.setState({selected: selected});
                                     }
                                     else if (index !== -1) {
                                         selected.splice(index, 1);
-                                        this.setState({selected: selected}, this.submit);
+                                        this.delete(exam);
+                                        this.setState({selected: selected});
                                     }
                                 }
                             }
@@ -326,8 +327,12 @@ class ExamsManager extends Component{
         );
     }
 
-    submit(){
-        setManyReference("exams", this.course, this.state.selected);
+    add(exam){
+      setOneReference("course", exam, this.course);
+    }
+
+    delete(exam){
+      deleteOneReference("course", exam, this.course);
     }
 }
 
