@@ -41,7 +41,7 @@ function getSorting(order, orderBy) {
 const columnData = [
     { id: 'File Name', numeric: false, disablePadding: false, label: 'File Name' },
     { id: 'File Type', numeric: false, disablePadding: false, label: 'File Type' },
-    { id: 'Size', numeric: false, disablePadding: false, label: 'Size'},
+    { id: 'Size', numeric: false, disablePadding: false, label: 'Size(M)'},
     { id: 'Preview', numeric: false, disablePadding: false, label: 'Preview' },
 ];
 
@@ -244,7 +244,7 @@ class ResourcesManager extends Component{
                         <TableRow key={file.name}>
                         <TableCell numeric={false}>{file.name}</TableCell>
                         <TableCell numeric={false}>{file.type}</TableCell>
-                        <TableCell numeric={false}>{file.size}</TableCell>
+                        <TableCell numeric={false}>{(file.size/1024/1024).toFixed(2)}</TableCell>
                         <TableCell numeric={false}><a href={file.preview}>Preview</a></TableCell>
                         </TableRow>
                     );
