@@ -26,15 +26,11 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import {
   lighten
 } from '@material-ui/core/styles/colorManipulator';
-import Checkbox from '@material-ui/core/Checkbox';
-import {
-  Link
-} from 'react-router-dom';
+import { fil } from "date-fns/locale";
 
 
 function getSorting(order, orderBy) {
@@ -45,11 +41,10 @@ function getSorting(order, orderBy) {
 
 
 const columnData = [
-    { id: 'Id', numeric: false, disablePadding: false,  label: 'Id'},
     { id: 'File Name', numeric: false, disablePadding: false, label: 'File Name' },
     { id: 'File Type', numeric: false, disablePadding: false, label: 'File Type' },
     { id: 'Size', numeric: false, disablePadding: false, label: 'Size'},
-    { id: 'Download', numeric: false, disablePadding: false, label: 'Download' },
+    { id: 'Preview', numeric: false, disablePadding: false, label: 'Preview' },
 ];
 
 
@@ -59,18 +54,10 @@ class EnhancedTableHead extends React.Component {
   };
 
   render() {
-    const { onSelectAllClick, order, orderBy, numSelected, rowCount } = this.props;
-
+    const { order, orderBy } = this.props;
     return (
       <TableHead>
         <TableRow>
-          <TableCell padding="checkbox">
-            <Checkbox
-              indeterminate={numSelected > 0 && numSelected < rowCount}
-              checked={numSelected === rowCount}
-              onChange={onSelectAllClick}
-            />
-          </TableCell>
           {columnData.map(column => {
             return (
               <TableCell
@@ -102,12 +89,9 @@ class EnhancedTableHead extends React.Component {
 }
 
 EnhancedTableHead.propTypes = {
-  numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
   order: PropTypes.string.isRequired,
   orderBy: PropTypes.string.isRequired,
-  rowCount: PropTypes.number.isRequired,
 };
 
 const toolbarStyles = theme => ({
@@ -137,7 +121,6 @@ const toolbarStyles = theme => ({
 
 let EnhancedTableToolbar = props => {
   const { numSelected, classes } = props;
-
   return (
     <Toolbar
       className={classNames(classes.root, {
@@ -151,25 +134,19 @@ let EnhancedTableToolbar = props => {
           </Typography>
         ) : (
           <Typography variant="title" id="tableTitle">
-            All
+            Selected
           </Typography>
         )}
       </div>
       <div className={classes.spacer} />
       <div className={classes.actions}>
-        {numSelected > 0 ? (
-          < Tooltip title = "CheckCircle" >
-            <IconButton aria-label="CheckCircle">
-              <CheckCircleIcon />
-            </IconButton>
-          </Tooltip>
-        ) : (
+        {
           <Tooltip title="Filter list">
             <IconButton aria-label="Filter list">
               <FilterListIcon />
             </IconButton>
           </Tooltip>
-        )}
+        }
       </div>
     </Toolbar>
   );
@@ -210,16 +187,14 @@ class ResourcesManager extends Component{
         this.course = props.source;
         this.state = {
             files: [],
-            pages: 0, 
+            page: 0, 
             rowsPerPage: 5,
             order: 'asc',
-            orderBy: 'id',
+            orderBy: 'name',
         }
     }
 
-    componentDidMount(){
-        getManyReference("courses", "recourses", this.course)
-            .then(files => this.setState({files: files[0]}));
+    componentDidMount(){ 
     }
 
     handleRequestSort = (event, property) => {
@@ -246,13 +221,11 @@ class ResourcesManager extends Component{
         const classes = this.props;
         const { files, order, orderBy, page, rowsPerPage} = this.state;
         const emptyRows = rowsPerPage - Math.min(rowsPerPage, files.length - page * rowsPerPage);
-        console.log(files);
         return (
         <div>
             <DropZone multiple={true} onDrop={this.onDrop.bind(this)} className="card" style={cardStyle}>
                 <div className="card-body align-items-center justify-content-center d-flex">Drops files here</div>
             </DropZone>
-            
            <Paper className={classes.root}>
             <EnhancedTableToolbar numSelected={files.length} />
             <div className={classes.tableWrapper}>
@@ -270,47 +243,11 @@ class ResourcesManager extends Component{
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map( file => {
                     return (
-                        <TableRow
-                        hover
-                        role="checkbox"
-                        
-                        tabIndex={-1}
-                        key={file.id}
-
-                        >
-                        <TableCell padding="checkbox">
-                            <Checkbox
-                                onChange={
-                                // () => { 
-                                //     let index = isIdExists(selected, user.id);
-                                //     if (index === -1) {
-                                //         selected.push(user);
-                                //         this.setState({selected: selected}, this.submit);
-                                //     }
-                                //     else if (index !== -1) {
-                                //         selected.splice(index, 1);
-                                //         this.setState({selected: selected}, this.submit);
-                                //     }
-                                // }
-                               () => {}
-                            }
-                            // checked={isIdExists(this.state.selected, user.id) !== -1 ? true : false}
-                            checked={true}
-                            />
-                        </TableCell>
-                        <TableCell numeric={false}>{file.id}</TableCell>
-                        <TableCell numeric={false}>{file.name} /></TableCell>
-                        <TableCell numeric={false}>{file.fileType}</TableCell>
+                        <TableRow key={file.name}>
+                        <TableCell numeric={false}>{file.name}</TableCell>
+                        <TableCell numeric={false}>{file.type}</TableCell>
                         <TableCell numeric={false}>{file.size}</TableCell>
-                        <TableCell numeric={false}>
-                            <Button variant="outlined" 
-                                    size="small" 
-                                    color="primary" 
-                                    className={classes.button}
-                                    component={props => <Link to={file.url} {...props} />}>
-                                Download
-                            </Button>
-                        </TableCell>
+                        <TableCell numeric={false}><a href={file.preview}>Preview</a></TableCell>
                         </TableRow>
                     );
                     })}
