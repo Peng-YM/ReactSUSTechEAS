@@ -29,6 +29,7 @@ import StudentsManager from './studentsManager';
 import RichTextInput from 'ra-input-rich-text';
 import BookIcon from '@material-ui/icons/Book';
 import ResourcesManager from './resourcesManager';
+import ExamsManager from './examsManager';
 
 export const CourseIcon = BookIcon;
 
@@ -125,6 +126,9 @@ export const CourseEdit = props => (
             <FormTab label="resources">
                 <CourseResources/>
             </FormTab>
+            <FormTab label="exams">
+                <CourseExams/>
+            </FormTab>
         </TabbedForm>
     </Edit>
 );
@@ -157,6 +161,14 @@ const CourseResources = ({record}) => {
     return (
         <div>
             <ResourcesManager source={record}/>
+        </div>
+    );
+};
+
+const CourseExams = ({record}) => {
+    return (
+        <div>
+            <ExamsManager source={record}/>
         </div>
     );
 };

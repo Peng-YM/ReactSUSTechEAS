@@ -1,18 +1,11 @@
-import React, {
-  Component
-} from "react";
-import Button from '@material-ui/core/Button';
-import {
-  uploadCourseFiles,
-} from '../utils/api';
-import DropZone from 'react-dropzone';
+import React, { Component } from 'react';
+import {getList, getManyReference, isIdExists, setManyReference} from '../utils/api';
+import Checkbox from '@material-ui/core/Checkbox';
 
 
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import {
-  withStyles
-} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -25,26 +18,23 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import FilterListIcon from '@material-ui/icons/FilterList';
-import {
-  lighten
-} from '@material-ui/core/styles/colorManipulator';
+import { lighten } from '@material-ui/core/styles/colorManipulator';
 
 
 function getSorting(order, orderBy) {
-  return order === 'desc' ?
-    (a, b) => (b[orderBy] < a[orderBy] ? -1 : 1) :
-    (a, b) => (a[orderBy] < b[orderBy] ? -1 : 1);
+    return order === 'desc' ?
+        (a, b) => (b[orderBy] < a[orderBy] ? -1 : 1):
+        (a, b) => (a[orderBy] < b[orderBy] ? -1 : 1);
 }
 
 
 const columnData = [
-    { id: 'File Name', numeric: false, disablePadding: false, label: 'File Name' },
-    { id: 'File Type', numeric: false, disablePadding: false, label: 'File Type' },
-    { id: 'Size', numeric: false, disablePadding: false, label: 'Size'},
-    { id: 'Preview', numeric: false, disablePadding: false, label: 'Preview' },
+    { id: 'Id', numeric: false, disablePadding: false,  label: 'Id'},
+    { id: 'Exam Name', numeric: false, disablePadding: false, label: 'Exam Name'},
+    { id: 'Date', numeric: false, disablePadding: false, label: 'Date' },
 ];
-
 
 class EnhancedTableHead extends React.Component {
   createSortHandler = property => event => {
@@ -52,10 +42,18 @@ class EnhancedTableHead extends React.Component {
   };
 
   render() {
-    const { order, orderBy } = this.props;
+    const { onSelectAllClick, order, orderBy, numSelected, rowCount } = this.props;
+
     return (
       <TableHead>
         <TableRow>
+          <TableCell padding="checkbox">
+            <Checkbox
+              indeterminate={numSelected > 0 && numSelected < rowCount}
+              checked={numSelected === rowCount}
+              onChange={onSelectAllClick}
+            />
+          </TableCell>
           {columnData.map(column => {
             return (
               <TableCell
@@ -87,10 +85,14 @@ class EnhancedTableHead extends React.Component {
 }
 
 EnhancedTableHead.propTypes = {
-  onRequestSort: PropTypes.func.isRequired,
-  order: PropTypes.string.isRequired,
-  orderBy: PropTypes.string.isRequired,
+    numSelected: PropTypes.number.isRequired,
+    onRequestSort: PropTypes.func.isRequired,
+    onSelectAllClick: PropTypes.func.isRequired,
+    order: PropTypes.string.isRequired,
+    orderBy: PropTypes.string.isRequired,
+    rowCount: PropTypes.number.isRequired,
 };
+
 
 const toolbarStyles = theme => ({
   root: {
@@ -119,6 +121,7 @@ const toolbarStyles = theme => ({
 
 let EnhancedTableToolbar = props => {
   const { numSelected, classes } = props;
+
   return (
     <Toolbar
       className={classNames(classes.root, {
@@ -132,19 +135,25 @@ let EnhancedTableToolbar = props => {
           </Typography>
         ) : (
           <Typography variant="title" id="tableTitle">
-            Selected
+            All
           </Typography>
         )}
       </div>
       <div className={classes.spacer} />
       <div className={classes.actions}>
-        {
+        {numSelected > 0 ? (
+          < Tooltip title = "CheckCircle" >
+            <IconButton aria-label="CheckCircle">
+              <CheckCircleIcon />
+            </IconButton>
+          </Tooltip>
+        ) : (
           <Tooltip title="Filter list">
             <IconButton aria-label="Filter list">
               <FilterListIcon />
             </IconButton>
           </Tooltip>
-        }
+        )}
       </div>
     </Toolbar>
   );
@@ -171,29 +180,34 @@ const styles = theme => ({
 });
 
 
-var buttonStyle = {
-  width: "100%"
-}
-
-var cardStyle = {
-  height: "200px"
-}
-
-class ResourcesManager extends Component{
+class ExamsManager extends Component{
     constructor(props){
         super(props);
         this.course = props.source;
         this.state = {
-            files: [],
-            page: 0, 
-            rowsPerPage: 5,
+            // all exams
+            exams: [],
+            //default order 
             order: 'asc',
-            orderBy: 'name',
-        }
+            //key for order
+            orderBy: 'id',
+            //page number
+            page: 0,
+            //rows number per page
+            rowsPerPage: 5,
+             // exams that already choose this course
+            selected: [],
+        };
     }
 
-    componentDidMount(){ 
+    componentDidMount(){
+        getList("exams")
+            .then(exams => this.setState({exams: exams}));
+        // get exam that already choose this course
+        getManyReference("courses", "exams", this.course)
+            .then(selected => this.setState({selected: selected[0]}));
     }
+
 
     handleRequestSort = (event, property) => {
         const orderBy = property;
@@ -206,6 +220,21 @@ class ResourcesManager extends Component{
         this.setState({ order, orderBy });
     };
 
+    handleSelectAllClick = (event, checked) => {
+        if (checked) {
+            let selected = this.state.selected;
+            for(var i = 0; i < this.state.exams.length; ++i) {
+                 let index = isIdExists(this.state.selected, this.state.exams[i].id);
+                 if (index === -1) {
+                     selected.push(this.state.exams[i]);
+                 }
+            }
+            this.setState({ selected: selected }, this.submit );
+            return;
+        }
+        this.setState({ selected: [] }, this.submit);
+    };
+
     handleChangePage = (event, page) => {
         this.setState({ page: page });
     };
@@ -214,38 +243,60 @@ class ResourcesManager extends Component{
         this.setState({ rowsPerPage: event.target.value });
     };
 
-
     render(){
         const classes = this.props;
-        const { files, order, orderBy, page, rowsPerPage} = this.state;
-        const emptyRows = rowsPerPage - Math.min(rowsPerPage, files.length - page * rowsPerPage);
+        const { exams, order, orderBy, page, rowsPerPage, selected } = this.state;
+        console.log(exams);
+        const emptyRows = rowsPerPage - Math.min(rowsPerPage, exams.length - page * rowsPerPage);
         return (
-        <div>
-            <DropZone multiple={true} onDrop={this.onDrop.bind(this)} className="card" style={cardStyle}>
-                <div className="card-body align-items-center justify-content-center d-flex">Drops files here</div>
-            </DropZone>
-           <Paper className={classes.root}>
-            <EnhancedTableToolbar numSelected={files.length} />
+            <Paper className={classes.root}>
+            <EnhancedTableToolbar numSelected={selected.length} />
             <div className={classes.tableWrapper}>
             <Table className={classes.table} aria-labelledby="tableTitle">
                 <EnhancedTableHead
-                numSelected={files.length}
+                numSelected={selected.length}
                 order={order}
                 orderBy={orderBy}
+                onSelectAllClick={this.handleSelectAllClick}
                 onRequestSort={this.handleRequestSort}
-                rowCount={files.length}
+                rowCount={exams.length}
                 />
                 <TableBody>
-                {files
+                {exams
                     .sort(getSorting(order, orderBy))
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map( file => {
+                    .map( exam => {
+                    const isSelected = isIdExists(exams, exam.id) !== -1 ? true : false;
                     return (
-                        <TableRow key={file.name}>
-                        <TableCell numeric={false}>{file.name}</TableCell>
-                        <TableCell numeric={false}>{file.type}</TableCell>
-                        <TableCell numeric={false}>{file.size}</TableCell>
-                        <TableCell numeric={false}><a href={file.preview}>Preview</a></TableCell>
+                        <TableRow
+                        hover
+                        role="checkbox"
+                        aria-checked={isSelected}
+                        tabIndex={-1}
+                        key={exam.id}
+                        selected={isSelected}
+                        >
+                        <TableCell padding="checkbox">
+                            <Checkbox
+                                onChange={
+                                () => { 
+                                    let index = isIdExists(selected, exam.id);
+                                    if (index === -1) {
+                                        selected.push(exam);
+                                        this.setState({selected: selected}, this.submit);
+                                    }
+                                    else if (index !== -1) {
+                                        selected.splice(index, 1);
+                                        this.setState({selected: selected}, this.submit);
+                                    }
+                                }
+                            }
+                            checked={isIdExists(this.state.selected, exam.id) !== -1 ? true : false}
+                            />
+                        </TableCell>
+                        <TableCell numeric={false}>{exam.id}</TableCell>
+                        <TableCell numeric={false}>{exam.examName}</TableCell>
+                        <TableCell numeric={false}>{exam.date}</TableCell>
                         </TableRow>
                     );
                     })}
@@ -259,7 +310,7 @@ class ResourcesManager extends Component{
             </div>
             <TablePagination
             component="div"
-            count={files.length}
+            count={exams.length}
             rowsPerPage={rowsPerPage}
             page={page}
             backIconButtonProps={{
@@ -271,23 +322,18 @@ class ResourcesManager extends Component{
             onChangePage={this.handleChangePage}
             onChangeRowsPerPage={this.handleChangeRowsPerPage}
             />
-        </Paper>   
-        <Button variant="outlined" color="primary" style={buttonStyle} onClick={() => this.upload()}>Upload</Button>
-        </div>
-    );
+        </Paper>       
+        );
     }
 
-    onDrop(files){
-        this.setState({files: files});
-    }
-
-    upload(){
-        uploadCourseFiles(this.course, this.state.files);
+    submit(){
+        setManyReference("exams", this.course, this.state.selected);
     }
 }
 
-ResourcesManager.propTypes = {
+ExamsManager.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ResourcesManager);
+
+export default withStyles(styles)(ExamsManager);
